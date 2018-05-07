@@ -8,6 +8,12 @@ export default class List extends React.Component {
     posts: [],
   };
 
+  async componentDidMount() {
+    const posts = JSON.parse(await AsyncStorage.getItem('@TestRN:posts')) || [];
+
+    this.setState({ posts });
+  }
+
   renderPosts = () => (
     <ScrollView>
       { this.state.posts.map(post => <Post key={post.id} post={post} onDelete={this.deletePost}/>) }
