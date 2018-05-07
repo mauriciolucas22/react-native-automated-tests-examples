@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Text, ScrollView, Button } from 'react-native';
+import { Text, ScrollView, Button, AsyncStorage } from 'react-native';
+import sinon from 'sinon';
 
 import List from '../../src/List';
 
@@ -31,7 +32,7 @@ describe('<List />', () => {
   it('can add new post', () => {
     const wrapper = shallow(<List />);
 
-    wrapper.find(Button).simulate('press');
+    wrapper.find({ id: 'new' }).simulate('press');
 
     expect(wrapper.state('posts')).toHaveLength(1);
   });
@@ -44,5 +45,17 @@ describe('<List />', () => {
 
     expect(wrapper.state('posts'))
       .toEqual(posts.filter(post => post.id !== 1));
+  });
+
+  it('can save posts', () => {
+    sinon.spy(AsyncStorage, 'setItem');
+
+    const wrapper = shallow(<List />);
+    wrapper.setState({ posts });
+
+    wrapper.find({ id: 'save' }).simulate('press');
+
+    expect(AsyncStorage.setItem.calledOnce).toBe(true);
+    expect(AsyncStorage.setItem.args[0][1]).toBe(JSON.stringify(posts));
   });
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, Button } from 'react-native';
+import { View, Text, ScrollView, Button, AsyncStorage } from 'react-native';
 
 import Post from './Post';
 
@@ -10,7 +10,7 @@ export default class List extends React.Component {
 
   renderPosts = () => (
     <ScrollView>
-      { this.state.posts.map(post => <Post key={post.id} post={post}/>) }
+      { this.state.posts.map(post => <Post key={post.id} post={post} onDelete={this.deletePost}/>) }
     </ScrollView>
   );
 
@@ -21,6 +21,10 @@ export default class List extends React.Component {
         { id: Math.random(), title: 'New Post', description: 'new Desc' },
       ],
     });
+  };
+
+  savePost = async () => {
+    AsyncStorage.setItem('@TestRN:posts', JSON.stringify(this.state.posts));
   };
 
   deletePost = id => {
@@ -37,7 +41,8 @@ export default class List extends React.Component {
           : <Text>Nenhum post!</Text>
         }
 
-        <Button title="Add post" onPress={this.addPost}/>
+        <Button id="new" title="Add post" onPress={this.addPost}/>
+        <Button id="save" title="Save post" onPress={this.savePost}/>
       </View>
     );
   }
