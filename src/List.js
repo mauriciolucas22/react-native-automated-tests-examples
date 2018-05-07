@@ -1,21 +1,27 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 import Post from './Post';
 
-const posts = [
-  { id: 1, title: 'Test', description: 'desc' },
-  { id: 2, title: 'Test', description: 'desc' },
-  { id: 3, title: 'Test', description: 'desc' },
-];
+export default class List extends React.Component {
+  state = {
+    posts: [],
+  };
 
-const List = ({ posts }) => (
-  <View>
-    { posts.length > 0
-      ? posts.map(post => <Post key={post.id} post={post}/>)
-      : <Text>Nenhum post!</Text>
-    }
-  </View>
-);
+  renderPosts = () => (
+    <ScrollView>
+      { this.state.posts.map(post => <Post key={post.id} post={post}/>) }
+    </ScrollView>
+  );
 
-export default List;
+  render() {
+    return(
+      <View>
+        { this.state.posts.length > 0
+          ? this.renderPosts()
+          : <Text>Nenhum post!</Text>
+        }
+      </View>
+    );
+  }
+}
