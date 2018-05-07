@@ -23,6 +23,12 @@ export default class List extends React.Component {
     });
   };
 
+  deletePost = id => {
+    this.setState({
+      posts: this.state.posts.filter(post => post.id !== id),
+    });
+  };
+
   render() {
     return(
       <View>
