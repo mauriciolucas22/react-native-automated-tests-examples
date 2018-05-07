@@ -2,11 +2,11 @@
 
 ![](http://sinonjs.org/assets/images/logo.png)
 
-####How to use!
+###How to use!
 
 > Use `npm` or `yarn`.
 
-####Run in terminal
+###Run in terminal
 
 ```bash
 yarn install
