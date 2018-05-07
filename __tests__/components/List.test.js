@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Text, ScrollView } from 'react-native';
+import { Text, ScrollView, Button } from 'react-native';
 
 import List from '../../src/List';
 
@@ -26,5 +26,13 @@ describe('<List />', () => {
     wrapper.setState({ posts });
     expect(wrapper.contains(<Text>Nenhum post!</Text>)).toBe(false);
 
+  });
+
+  it('can add new post', () => {
+    const wrapper = shallow(<List />);
+
+    wrapper.find(Button).simulate('press');
+
+    expect(wrapper.state('posts')).toHaveLength(1);
   });
 });

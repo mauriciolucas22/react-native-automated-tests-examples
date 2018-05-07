@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Button } from 'react-native';
 
 import Post from './Post';
 
@@ -14,6 +14,15 @@ export default class List extends React.Component {
     </ScrollView>
   );
 
+  addPost = () => {
+    this.setState({
+      posts: [
+        ...this.state.posts,
+        { id: Math.random(), title: 'New Post', description: 'new Desc' },
+      ],
+    });
+  };
+
   render() {
     return(
       <View>
@@ -21,6 +30,8 @@ export default class List extends React.Component {
           ? this.renderPosts()
           : <Text>Nenhum post!</Text>
         }
+
+        <Button title="Add post" onPress={this.addPost}/>
       </View>
     );
   }
