@@ -31,4 +31,10 @@ describe('Testing todo reducer', () => {
 
     expect(state[0].completed).toBe(false);
   });
+
+  it('reducer default', () => {
+    const state = todoReducer(todos, { type: 'INVALID' });
+
+    expect(state).toEqual(todos);
+  });
 });
