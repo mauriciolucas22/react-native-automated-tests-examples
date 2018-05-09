@@ -9,7 +9,7 @@ function* addUserFromGithub(action) {
   if (response.ok) {
     yield put(actions.addUserSuccess(response.data));
   } else {
-    yield put(action.addUserFailure());
+    yield put(actions.addUserFailure());
   }
 }
 

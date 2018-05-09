@@ -9,14 +9,14 @@ export function addUserRequest(username) {
 
 export function addUserSuccess(user) {
   return {
-    type: 'SUCCESS',
+    type: 'ADD_USER_SUCCESS',
     playload: {
       user,
     },
   }
 }
 
-export function addUserFailure(username) {
+export function addUserFailure() {
   return {
     type: 'ADD_USER_FAILURE',
   }
